@@ -2,6 +2,7 @@ import entities.Audio;
 import entities.ElementoMultimediale;
 import entities.Immagine;
 import entities.Video;
+import interfaces.NonRiproducibile;
 import interfaces.Riproducibile;
 
 public static void main(String[] args) {
@@ -121,13 +122,88 @@ public static void main(String[] args) {
             ElementoMultimediale elementoSelezionato = playlistMultimediale[selezionato - 1];
             System.out.println("Esecuzione di:" + " " + elementoSelezionato.getTitolo());
 
-            if (elementoSelezionato instanceof Immagine) {
-                ((Immagine) elementoSelezionato).show();
-            } else if (elementoSelezionato instanceof Riproducibile) {
-                ((Riproducibile) elementoSelezionato).play();
+            int opzioni = -1;
+            while (opzioni != 0) {
+                System.out.println("\nOpzioni eseguibili per :" + elementoSelezionato.getTitolo() + ":");
+                System.out.println(" 1 Esegui / Mostra");
+                if (elementoSelezionato instanceof Riproducibile) {
+                    System.out.println("2. Alza Volume");
+                    System.out.println("3. Abbassa Volume");
+                    System.out.println("4. Aumenta Luminosità");
+                    System.out.println("5. Diminuisci Luminosità");
+                }
+                if (elementoSelezionato instanceof NonRiproducibile) {
+                    System.out.println("2. Aumenta luminosità");
+                    System.out.println("3. Diminuisci luminosità");
+                }
+                System.out.println("0. Torna al menu principale");
+                System.out.println("Scelta azione:");
+
+                // eseguo di nuovo il controllo tramite hasNextInt
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Errore: inserisci un numero valido!");
+                    System.out.println("Scelta azione:");
+                    scanner.nextLine();
+                }
+
+                opzioni = Integer.parseInt(scanner.nextLine());
+
+                switch (opzioni) {
+                    case 1 -> {
+                        if (elementoSelezionato instanceof Immagine) {
+                            ((Immagine) elementoSelezionato).show();
+                        } else if (elementoSelezionato instanceof Riproducibile) {
+                            ((Riproducibile) elementoSelezionato).play();
+                        }
+                    }
+                    case 2 -> {
+                        if (elementoSelezionato instanceof Audio) {
+                            ((Audio) elementoSelezionato).alzaVolume();
+                            System.out.println("Volume dell'audio alzato!");
+                        } else if (elementoSelezionato instanceof Video) {
+                            ((Video) elementoSelezionato).alzaVolume();
+                            System.out.println("Volume del video alzato!");
+                        } else {
+                            System.out.println("Opzione non disponibile per questo elemento multimediale.");
+                        }
+                    }
+                    case 3 -> {
+                        if (elementoSelezionato instanceof Audio) {
+                            ((Audio) elementoSelezionato).abbassaVolume();
+                            System.out.println("Volume dell'audio abbassato!");
+                        } else if (elementoSelezionato instanceof Video) {
+                            ((Video) elementoSelezionato).abbassaVolume();
+                            System.out.println("Volume del video abbassato!");
+                        } else {
+                            System.out.println("Opzione non disponibile per questo elemento multimediale.");
+                        }
+                    }
+                    case 4 -> {
+                        if (elementoSelezionato instanceof Video) {
+                            ((Video) elementoSelezionato).aumentaLuminosita();
+                            System.out.println("Luminosità del video aumentata!");
+                        } else if (elementoSelezionato instanceof Immagine) {
+                            ((Immagine) elementoSelezionato).aumentaLuminosita();
+                            System.out.println("Luminosità dell'immagine aumentata!");
+                        } else {
+                            System.out.println("Opzione non disponibile per questo elemento multimediale.");
+                        }
+                    }
+                    case 5 -> {
+                        if (elementoSelezionato instanceof Video) {
+                            ((Video) elementoSelezionato).diminuisciLuminosita();
+                            System.out.println("Luminosità del video diminuita!");
+                        } else if (elementoSelezionato instanceof Immagine) {
+                            ((Immagine) elementoSelezionato).diminuisciLuminosita();
+                            System.out.println("Luminosità dell'immagine diminuita!");
+                        } else {
+                            System.out.println("Opzione non disponibile per questo elemento multimediale.");
+                        }
+                    }
+                    case 0 -> System.out.println("Ritorno al menu principale");
+                    default -> System.out.println("Scelta non valida, inserisci un numero da 0 a 5.");
+                }
             }
-        } else if (selezionato != 0) {
-            System.out.println("Selezione non valida, scegli un elemento da 1 a 5.");
         }
     }
 
