@@ -10,11 +10,11 @@ public class Immagine extends ElementoMultimediale implements NonRiproducibile {
         this.luminosita = luminosita;
     }
 
-    public void alzaLuminosita() {
+    public void aumentaLuminosita() {
         luminosita++;
     }
 
-    public void abbassaLuminosita() {
+    public void diminuisciLuminosita() {
         if (luminosita > 0) luminosita--;
     }
 

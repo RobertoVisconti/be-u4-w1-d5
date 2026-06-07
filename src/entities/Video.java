@@ -1,9 +1,8 @@
 package entities;
 
-import interfaces.NonRiproducibile;
 import interfaces.Riproducibile;
 
-public class Video extends ElementoMultimediale implements Riproducibile, NonRiproducibile {
+public class Video extends ElementoMultimediale implements Riproducibile {
     private int durata;
     private int volume;
     private int luminosita;
@@ -23,11 +22,11 @@ public class Video extends ElementoMultimediale implements Riproducibile, NonRip
         if (volume > 0) volume--;
     }
 
-    public void alzaLuminosita() {
+    public void aumentaLuminosita() {
         luminosita++;
     }
 
-    public void abbassaLuminosita() {
+    public void diminuisciLuminosita() {
         if (luminosita > 0) luminosita--;
     }
 
@@ -38,18 +37,11 @@ public class Video extends ElementoMultimediale implements Riproducibile, NonRip
             for (int v = 0; v < volume; v++) {
                 System.out.println("!");
             }
-            System.out.println();
-        }
-    }
-
-    @Override
-    public void show() {
-        for (int i = 0; i < durata; i++) {
-            System.out.print(titolo + " ");
             for (int l = 0; l < luminosita; l++) {
                 System.out.println("*");
             }
             System.out.println();
         }
     }
+
 }
