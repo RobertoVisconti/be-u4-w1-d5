@@ -162,37 +162,38 @@ public static void main(String[] args) {
                         }
                     }
                     case 2 -> {
+
                         if (elementoSelezionato instanceof Audio) {
-                            ((Audio) elementoSelezionato).alzaVolume();
+                            ((Audio) elementoSelezionato).alzaVolume(scanner);
                         } else if (elementoSelezionato instanceof Video) {
-                            ((Video) elementoSelezionato).alzaVolume();
+                            ((Video) elementoSelezionato).alzaVolume(scanner);
                         } else if (elementoSelezionato instanceof Immagine) {
-                            ((Immagine) elementoSelezionato).aumentaLuminosita();
+                            ((Immagine) elementoSelezionato).aumentaLuminosita(scanner);
                         } else {
                             System.out.println("Opzione non disponibile per questo elemento multimediale.");
                         }
                     }
                     case 3 -> {
                         if (elementoSelezionato instanceof Audio) {
-                            ((Audio) elementoSelezionato).abbassaVolume();
+                            ((Audio) elementoSelezionato).abbassaVolume(scanner);
                         } else if (elementoSelezionato instanceof Video) {
-                            ((Video) elementoSelezionato).abbassaVolume();
+                            ((Video) elementoSelezionato).abbassaVolume(scanner);
                         } else if (elementoSelezionato instanceof Immagine) {
-                            ((Immagine) elementoSelezionato).diminuisciLuminosita();
+                            ((Immagine) elementoSelezionato).diminuisciLuminosita(scanner);
                         } else {
                             System.out.println("Opzione non disponibile per questo elemento multimediale.");
                         }
                     }
                     case 4 -> {
                         if (elementoSelezionato instanceof Video) {
-                            ((Video) elementoSelezionato).aumentaLuminosita();
+                            ((Video) elementoSelezionato).aumentaLuminosita(scanner);
                         } else {
                             System.out.println("Opzione non disponibile per questo elemento multimediale.");
                         }
                     }
                     case 5 -> {
                         if (elementoSelezionato instanceof Video) {
-                            ((Video) elementoSelezionato).diminuisciLuminosita();
+                            ((Video) elementoSelezionato).diminuisciLuminosita(scanner);
                         } else {
                             System.out.println("Opzione non disponibile per questo elemento multimediale.");
                         }

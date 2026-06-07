@@ -2,6 +2,8 @@ package entities;
 
 import interfaces.Riproducibile;
 
+import java.util.Scanner;
+
 public class Audio extends ElementoMultimediale implements Riproducibile {
     private int durata;
     private int volume;
@@ -15,23 +17,46 @@ public class Audio extends ElementoMultimediale implements Riproducibile {
         else this.volume = volume;
     }
 
-    public void alzaVolume() {
-        if (volume < 100) {
-            volume++;
-            System.out.println("Volume dell'audio alzato. Volume attuale:" + " " + volume);
-        } else {
-            System.out.println("Il volume dell'audio è già al massimo: 100.");
+    // Aumento e Diminuisco tramite lo scanner
+    public void alzaVolume(Scanner scanner) {
+        System.out.println("Di quanto vuoi aumentare il volume ?");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Errore, inserisci un numero valido.");
+            scanner.nextLine();
         }
+        int valore = Integer.parseInt(scanner.nextLine().trim());
+        if (volume + valore <= 100) {
+            volume += valore;
+        } else {
+            volume = 100;
+            System.out.println("Il volume dell'audio ha raggiunto il massimo: 100.");
+        }
+        System.out.print("Volume attuale: ");
+        for (int v = 0; v < volume; v++) {
+            System.out.print("!");
+        }
+        System.out.println();
     }
 
-    public void abbassaVolume() {
-        if (volume > 0) {
-            volume--;
-            System.out.println("Volume dell'audio abbassato. Volume attuale:" + " " + volume);
+    public void abbassaVolume(Scanner scanner) {
+        System.out.println("Di quanto vuoi abbassare il volume ?");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Errore, inserisci un numero valido.");
+        }
+        int valore = Integer.parseInt(scanner.nextLine().trim());
+        if (volume - valore >= 0) {
+            volume -= valore;
         } else {
+            volume = 0;
             System.out.println("Il volume è già al minimo: 0");
         }
+        System.out.print("Volume attuale: ");
+        for (int v = 0; v < volume; v++) {
+            System.out.print("!");
+        }
+        System.out.println();
     }
+
 
     @Override
     public void play() {
