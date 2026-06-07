@@ -7,15 +7,28 @@ public class Immagine extends ElementoMultimediale implements NonRiproducibile {
 
     public Immagine(String titolo, int luminosita) {
         super(titolo);
-        this.luminosita = luminosita;
+        // Imposto il valore d'inserimento a 100 se inseriscono più di 100, e a 0 se inseriscono un numero negativo
+        if (luminosita > 100) this.luminosita = 100;
+        else if (luminosita < 0) this.luminosita = 0;
+        else this.luminosita = luminosita;
     }
 
     public void aumentaLuminosita() {
-        luminosita++;
+        if (luminosita < 100) {
+            luminosita++;
+            System.out.println("Luminosità dell'immagine aumentata. Livello attuale:" + " " + luminosita);
+        } else {
+            System.out.println("Luminosità dell'immagine è già al massimo: 100");
+        }
     }
 
     public void diminuisciLuminosita() {
-        if (luminosita > 0) luminosita--;
+        if (luminosita > 0) {
+            luminosita--;
+            System.out.println("Luminosità dell'immagine abbassata. Livello attuale:" + " " + luminosita);
+        } else {
+            System.out.println("La luminotà dell'immagine  è già al minimo : 0");
+        }
     }
 
     @Override

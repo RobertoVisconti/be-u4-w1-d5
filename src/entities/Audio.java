@@ -9,15 +9,28 @@ public class Audio extends ElementoMultimediale implements Riproducibile {
     public Audio(String titolo, int durata, int volume) {
         super(titolo);
         this.durata = durata;
-        this.volume = volume;
+        // Imposto il valore d'inserimento a 100 se inseriscono più di 100, e a 0 se inseriscono un numero negativo
+        if (volume > 100) this.volume = 100;
+        else if (volume < 0) this.volume = 0;
+        else this.volume = volume;
     }
 
     public void alzaVolume() {
-        volume++;
+        if (volume < 100) {
+            volume++;
+            System.out.println("Volume dell'audio alzato. Volume attuale:" + " " + volume);
+        } else {
+            System.out.println("Il volume dell'audio è già al massimo: 100.");
+        }
     }
 
     public void abbassaVolume() {
-        if (volume > 0) volume--;
+        if (volume > 0) {
+            volume--;
+            System.out.println("Volume dell'audio abbassato. Volume attuale:" + " " + volume);
+        } else {
+            System.out.println("Il volume è già al minimo: 0");
+        }
     }
 
     @Override

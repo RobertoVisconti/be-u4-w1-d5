@@ -24,10 +24,15 @@ public static void main(String[] args) {
             System.out.println("Scegli il tipo di elemento (1 = Audio, 2 = Video, 3 = Immagine): ");
             scanner.nextLine();
         }
-        int tipologia = Integer.parseInt(scanner.nextLine());
+        // uso trim così da ripulire gli spazi vuoti all'inizio e alla fine, utilizzato anche per i metodi
+        int tipologia = Integer.parseInt(scanner.nextLine().trim());
 
         System.out.println("Inserisci il titolo:");
         String titolo = scanner.nextLine();
+
+        if (titolo.isEmpty()) {
+            titolo = scanner.nextLine();
+        }
 
         // Switch per i casi di selezionato
         switch (tipologia) {
@@ -38,7 +43,7 @@ public static void main(String[] args) {
                     System.out.print("Inserisci la durata:" + " ");
                     scanner.nextLine();
                 }
-                int durataAudio = Integer.parseInt(scanner.nextLine());
+                int durataAudio = Integer.parseInt(scanner.nextLine().trim());
 
                 System.out.print("Inserisci il volume iniziale:" + " ");
                 while (!scanner.hasNextInt()) {
@@ -46,7 +51,7 @@ public static void main(String[] args) {
                     System.out.print("Inserisci il volume iniziale:" + " ");
                     scanner.nextLine();
                 }
-                int volumeAudio = Integer.parseInt(scanner.nextLine());
+                int volumeAudio = Integer.parseInt(scanner.nextLine().trim());
 
                 playlistMultimediale[i] = new Audio(titolo, durataAudio, volumeAudio);
                 break;
@@ -58,7 +63,7 @@ public static void main(String[] args) {
                     System.out.print("Inserisci la durata:" + " ");
                     scanner.nextLine();
                 }
-                int durataVideo = Integer.parseInt(scanner.nextLine());
+                int durataVideo = Integer.parseInt(scanner.nextLine().trim());
 
                 System.out.print("Inserisci il volume iniziale:" + " ");
                 while (!scanner.hasNextInt()) {
@@ -66,7 +71,7 @@ public static void main(String[] args) {
                     System.out.print("Inserisci il volume iniziale:" + " ");
                     scanner.nextLine();
                 }
-                int volumeVideo = Integer.parseInt(scanner.nextLine());
+                int volumeVideo = Integer.parseInt(scanner.nextLine().trim());
 
                 System.out.print("Inserisci la luminosità iniziale:" + " ");
                 while (!scanner.hasNextInt()) {
@@ -74,7 +79,7 @@ public static void main(String[] args) {
                     System.out.print("Inserisci la luminosità iniziale:" + " ");
                     scanner.nextLine();
                 }
-                int luminositaVideo = Integer.parseInt(scanner.nextLine());
+                int luminositaVideo = Integer.parseInt(scanner.nextLine().trim());
 
                 playlistMultimediale[i] = new Video(titolo, durataVideo, volumeVideo, luminositaVideo);
                 break;
@@ -86,7 +91,7 @@ public static void main(String[] args) {
                     System.out.print("Inserisci la luminosità iniziale:" + " ");
                     scanner.nextLine();
                 }
-                int luminositaImmagine = Integer.parseInt(scanner.nextLine());
+                int luminositaImmagine = Integer.parseInt(scanner.nextLine().trim());
 
                 playlistMultimediale[i] = new Immagine(titolo, luminositaImmagine);
                 break;
@@ -146,7 +151,7 @@ public static void main(String[] args) {
                     scanner.nextLine();
                 }
 
-                opzioni = Integer.parseInt(scanner.nextLine());
+                opzioni = Integer.parseInt(scanner.nextLine().trim());
 
                 switch (opzioni) {
                     case 1 -> {
@@ -159,10 +164,10 @@ public static void main(String[] args) {
                     case 2 -> {
                         if (elementoSelezionato instanceof Audio) {
                             ((Audio) elementoSelezionato).alzaVolume();
-                            System.out.println("Volume dell'audio alzato!");
                         } else if (elementoSelezionato instanceof Video) {
                             ((Video) elementoSelezionato).alzaVolume();
-                            System.out.println("Volume del video alzato!");
+                        } else if (elementoSelezionato instanceof Immagine) {
+                            ((Immagine) elementoSelezionato).aumentaLuminosita();
                         } else {
                             System.out.println("Opzione non disponibile per questo elemento multimediale.");
                         }
@@ -170,10 +175,10 @@ public static void main(String[] args) {
                     case 3 -> {
                         if (elementoSelezionato instanceof Audio) {
                             ((Audio) elementoSelezionato).abbassaVolume();
-                            System.out.println("Volume dell'audio abbassato!");
                         } else if (elementoSelezionato instanceof Video) {
                             ((Video) elementoSelezionato).abbassaVolume();
-                            System.out.println("Volume del video abbassato!");
+                        } else if (elementoSelezionato instanceof Immagine) {
+                            ((Immagine) elementoSelezionato).diminuisciLuminosita();
                         } else {
                             System.out.println("Opzione non disponibile per questo elemento multimediale.");
                         }
@@ -181,10 +186,6 @@ public static void main(String[] args) {
                     case 4 -> {
                         if (elementoSelezionato instanceof Video) {
                             ((Video) elementoSelezionato).aumentaLuminosita();
-                            System.out.println("Luminosità del video aumentata!");
-                        } else if (elementoSelezionato instanceof Immagine) {
-                            ((Immagine) elementoSelezionato).aumentaLuminosita();
-                            System.out.println("Luminosità dell'immagine aumentata!");
                         } else {
                             System.out.println("Opzione non disponibile per questo elemento multimediale.");
                         }
@@ -192,10 +193,6 @@ public static void main(String[] args) {
                     case 5 -> {
                         if (elementoSelezionato instanceof Video) {
                             ((Video) elementoSelezionato).diminuisciLuminosita();
-                            System.out.println("Luminosità del video diminuita!");
-                        } else if (elementoSelezionato instanceof Immagine) {
-                            ((Immagine) elementoSelezionato).diminuisciLuminosita();
-                            System.out.println("Luminosità dell'immagine diminuita!");
                         } else {
                             System.out.println("Opzione non disponibile per questo elemento multimediale.");
                         }

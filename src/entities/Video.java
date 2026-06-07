@@ -10,24 +10,45 @@ public class Video extends ElementoMultimediale implements Riproducibile {
     public Video(String titolo, int durata, int volume, int luminosita) {
         super(titolo);
         this.durata = durata;
-        this.volume = volume;
-        this.luminosita = luminosita;
+        // Imposto il valore d'inserimento a 100 se inseriscono più di 100, e a 0 se inseriscono un numero negativo
+        this.volume = volume > 100 ? 100 : (Math.max(volume, 0));
+        this.luminosita = luminosita > 100 ? 100 : (Math.max(luminosita, 0));
     }
 
     public void alzaVolume() {
-        volume++;
+        if (volume < 100) {
+            volume++;
+            System.out.println("Volume del video alzato. Volume attuale:" + " " + volume);
+        } else {
+            System.out.println("Il volume del video è già al massimo: 100.");
+        }
     }
 
     public void abbassaVolume() {
-        if (volume > 0) volume--;
+        if (volume > 0) {
+            volume--;
+            System.out.println("Volume del video abbassato. Volume attuale:" + " " + volume);
+        } else {
+            System.out.println("Il volume del video è già al minimo: 0");
+        }
     }
 
     public void aumentaLuminosita() {
-        luminosita++;
+        if (luminosita < 100) {
+            luminosita++;
+            System.out.println("Luminosità del video aumentata. Livello attuale:" + " " + luminosita);
+        } else {
+            System.out.println("Luminosità del video è già al massimo: 100");
+        }
     }
 
     public void diminuisciLuminosita() {
-        if (luminosita > 0) luminosita--;
+        if (luminosita > 0) {
+            luminosita--;
+            System.out.println("Luminosità del video abbassata. Livello attuale:" + " " + luminosita);
+        } else {
+            System.out.println("La luminosità del video è già al minimo : 0");
+        }
     }
 
     @Override
