@@ -58,7 +58,7 @@ public class Immagine extends ElementoMultimediale implements NonRiproducibile {
     public void show() {
         System.out.print(titolo + " ");
         for (int l = 0; l < luminosita; l++) {
-            System.out.println("*");
+            System.out.print("*");
         }
         System.out.println();
     }

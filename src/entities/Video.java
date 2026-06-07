@@ -100,10 +100,10 @@ public class Video extends ElementoMultimediale implements Riproducibile {
         for (int i = 0; i < durata; i++) {
             System.out.print(titolo + " ");
             for (int v = 0; v < volume; v++) {
-                System.out.println("!");
+                System.out.print("!");
             }
             for (int l = 0; l < luminosita; l++) {
-                System.out.println("*");
+                System.out.print("*");
             }
             System.out.println();
         }
